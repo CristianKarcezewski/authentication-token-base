@@ -1,0 +1,6 @@
+@CMLApplication_HostAddress = http://localhost:5004
+
+GET {{CMLApplication_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
