@@ -1,5 +1,6 @@
 ﻿using CMLApplication.Application.Interfaces;
 using CMLApplication.Common.CustomExceptions;
+using CMLApplication.Common.Functions;
 using CMLApplication.Models;
 using CMLApplication.Models.DTO;
 using CMLApplication.Models.Entities;
@@ -32,7 +33,7 @@ namespace CMLApplication.Application.Implementation
             this.activityDirectoryRequests = activityDirectoryRequests;
         }
 
-        public string LoginColaborador(Autenticacao autenticacao)
+        public string LoginColaboradorAD(Autenticacao autenticacao)
         {
             bool autorizado = this.activityDirectoryRequests.AutenticarAD(autenticacao);
             if (autorizado)
@@ -61,6 +62,43 @@ namespace CMLApplication.Application.Implementation
             {
                 throw new CustomServiceException("Não autorizado por AD", 401);
             }
+        }
+
+        public string LoginColaborador(Autenticacao autenticacao)
+        {
+            ColaboradorEntity filtroColaborador = new ColaboradorEntity { Login = autenticacao.Login, Ativo = true };
+            ColaboradorEntity? colaboradorEntity = colaboradoresRepository.Filtrar(filtroColaborador).FirstOrDefault();
+            if (colaboradorEntity == null)
+            {
+                throw new CustomServiceException("Colaborador não encontrado", 404);
+            }
+            if (colaboradorEntity.IdChave == 0 || colaboradorEntity.Chave == null || string.IsNullOrWhiteSpace(colaboradorEntity.Chave.Senha)) 
+            {
+                throw new CustomServiceException("Senha de colaborador não cadastrada. Contate seu administrador.", 404);
+            }
+            if (!Encrypt.HashPassword(autenticacao.Password).Equals(colaboradorEntity.Chave.Senha))
+            {
+                throw new CustomServiceException("Usuario ou senha incorretos.", 401);
+            }
+
+            GrupoColaboradorPermissaoEntity filtroGrupo = new GrupoColaboradorPermissaoEntity { IdGrupoColaborador = colaboradorEntity.IdGrupoColaborador };
+            List<GrupoColaboradorPermissaoEntity>? gruposEntities = grupoColaboradorPermissaoRepository.Filtrar(filtroGrupo);
+            if (gruposEntities == null)
+            {
+                throw new CustomServiceException("Erro ao carregar permissões do colaborador", 404);
+            }
+
+            Colaborador colaborador = new Colaborador(colaboradorEntity);
+            gruposEntities.ForEach(grupo => {
+                if (grupo.IdPermissao != 0 && grupo.Permissao != null && !string.IsNullOrWhiteSpace(grupo.Permissao.Descricao))
+                {
+                    colaborador.Permissoes.Add(
+                        new Permissao { Id = grupo.IdPermissao, Descricao = grupo.Permissao.Descricao }
+                    );
+                }
+            });
+
+            return GerarJwtTokenColaborador(colaborador);
         }
 
         private string GerarJwtTokenColaborador(Colaborador colaborador)

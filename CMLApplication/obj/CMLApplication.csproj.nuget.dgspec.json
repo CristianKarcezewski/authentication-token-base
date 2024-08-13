@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Desenvolvimento\\Samae.CMLApplication\\CMLApplication\\CMLApplication.csproj": {}
+    "C:\\Desenvolvimento\\SAMAE\\authentication-token-base\\CMLApplication\\CMLApplication.csproj": {}
   },
   "projects": {
-    "D:\\Desenvolvimento\\Samae.CMLApplication\\CMLApplication\\CMLApplication.csproj": {
+    "C:\\Desenvolvimento\\SAMAE\\authentication-token-base\\CMLApplication\\CMLApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Desenvolvimento\\Samae.CMLApplication\\CMLApplication\\CMLApplication.csproj",
+        "projectUniqueName": "C:\\Desenvolvimento\\SAMAE\\authentication-token-base\\CMLApplication\\CMLApplication.csproj",
         "projectName": "CMLApplication",
-        "projectPath": "D:\\Desenvolvimento\\Samae.CMLApplication\\CMLApplication\\CMLApplication.csproj",
+        "projectPath": "C:\\Desenvolvimento\\SAMAE\\authentication-token-base\\CMLApplication\\CMLApplication.csproj",
         "packagesPath": "C:\\Users\\cristian.karcezewski\\.nuget\\packages\\",
-        "outputPath": "D:\\Desenvolvimento\\Samae.CMLApplication\\CMLApplication\\obj\\",
+        "outputPath": "C:\\Desenvolvimento\\SAMAE\\authentication-token-base\\CMLApplication\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\cristian.karcezewski\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -102,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

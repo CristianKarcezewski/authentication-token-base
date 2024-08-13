@@ -10,13 +10,13 @@ namespace CMLApplication.Repository.Implementation
         public DbSet<GrupoColaboradorEntity> GruposColaboradores { get; set; }
         public DbSet<GrupoColaboradorPermissaoEntity> GruposColaboradoresPermissoes { get; set; }
         public DbSet<PermissaoEntity> Permissoes { get; set; }
-
+        public DbSet<Chave> ChavesEncriptografadas { get; set; }
 
         public RepositoryDBContext(DbContextOptions<RepositoryDBContext> options) : base(options)
         {
         }
 
-        //Adiciona registros por default na criação da tabela
+        //Adiciona registros por default na criação das tabelas
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PermissaoEntity>().HasData(

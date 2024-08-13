@@ -6,10 +6,13 @@ namespace CMLApplication.Models.Entities
     [Table("grupos_colaboradores")]
     public class GrupoColaboradorEntity
     {
+        #region Propriedades
         [Key, Column("id")]
         public int Id { get; set; }
 
-        [Column("nome")]
+        [Required, Column("nome")]
         public string? Nome { get; set; }
+
+        #endregion
     }
 }

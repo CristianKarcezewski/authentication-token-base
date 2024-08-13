@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Q4VBVepqYnA=",
+  "dgSpecHash": "fdkbKtV4kGc=",
   "success": true,
-  "projectFilePath": "D:\\Desenvolvimento\\Samae.CMLApplication\\CMLApplication\\CMLApplication.csproj",
+  "projectFilePath": "C:\\Desenvolvimento\\SAMAE\\authentication-token-base\\CMLApplication\\CMLApplication.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cristian.karcezewski\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\cristian.karcezewski\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

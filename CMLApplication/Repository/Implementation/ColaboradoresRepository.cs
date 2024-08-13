@@ -6,7 +6,7 @@ using System.Linq.Dynamic.Core;
 
 namespace CMLApplication.Repository.Implementation
 {
-    public class ColaboradoresRepository : IColaboradoresRepository
+    public class ColaboradoresRepository : IBaseRepository
     {
         private readonly RepositoryDBContext _context;
 
@@ -18,6 +18,8 @@ namespace CMLApplication.Repository.Implementation
         public List<T> Filtrar<T>(T? entidade, int skip = 0, int take = 500, params string[] orderBy) where T : class
         {
             IQueryable<ColaboradorEntity> query = _context.Colaboradores.AsQueryable();
+            query = query.Include(c => c.GrupoColaborador);
+            query = query.Include(c => c.Chave);
 
             if (entidade != null && entidade is ColaboradorEntity)
             {
@@ -31,8 +33,6 @@ namespace CMLApplication.Repository.Implementation
                 if (!string.IsNullOrWhiteSpace(filtro.Telefone)) { query = query.Where(c => c.Telefone.Equals(filtro.Telefone)); }
                 query = query.Where(c => c.Ativo == filtro.Ativo);
             }
-
-            query = query.Include(c => c.GrupoColaborador);
 
             if (orderBy.Count() > 0)
             {

@@ -6,19 +6,24 @@ namespace CMLApplication.Models.Entities
     [Table("colaboradores")]
     public class ColaboradorEntity
     {
+        #region Propriedades
+
         [Key, Column("id")]
         public int Id { get; set; }
 
-        [Column("id_grupos_colaboradores")]
+        [Column("id_chave")]
+        public int IdChave { get;set; }
+
+        [Required, Column("id_grupos_colaboradores")]
         public int IdGrupoColaborador { get; set; }
 
-        [Column("login")]
+        [Required, Column("login")]
         public string? Login { get; set; }
 
-        [Column("nome_completo")]
+        [Required, Column("nome_completo")]
         public string? NomeCompleto { get; set; }
 
-        [Column("email")]
+        [Required, Column("email")]
         public string? Email { get; set; }
 
         [Column("telefone")]
@@ -27,36 +32,69 @@ namespace CMLApplication.Models.Entities
         [Column("ativo")]
         public bool Ativo {  get; set; }
 
-        [Column("ultima_atualizacao")]
+        [Required, Column("ultima_atualizacao")]
         public DateTime? UltimaAtualizacao { get; set; }
 
-        [Column("dthr")]
+        [Required, Column("dthr")]
         public DateTime? DTHR { get; set; }
+
+        #endregion
+
+        #region Chaves Estrangeiras
 
         [ForeignKey("Id")]
         public GrupoColaboradorEntity? GrupoColaborador { get; set; }
 
-        public string Nome()
+        [ForeignKey("Id")]
+        public Chave? Chave { get; set; }
+
+        #endregion
+
+        public ColaboradorEntity() { }
+        public ColaboradorEntity(Colaborador colaborador)
         {
-            if (!string.IsNullOrWhiteSpace(NomeCompleto))
-            {
-                string[] split = NomeCompleto.Split(" ");
-                return split[0];
-            }
-            return string.Empty;
+            this.Id = colaborador.Id;
+            this.Login = colaborador.Login;
+            this.NomeCompleto = colaborador.NomeCompleto;
+            this.Email = colaborador.Email;
+            this.Telefone = colaborador.Telefone;
+            this.Ativo = colaborador.Active;
+            this.UltimaAtualizacao = colaborador.UltimaAtualizacao;
+            this.DTHR = colaborador.DTHR;
         }
 
-        public string Sobrenome()
+        #region Propriedades Tratadas
+
+        [NotMapped]
+        public string Nome
         {
-            if (!string.IsNullOrWhiteSpace(NomeCompleto))
-            {
-                string[] split = NomeCompleto.Split(" ");
-                if (split.Length > 1)
+            get {
+                if (!string.IsNullOrWhiteSpace(NomeCompleto))
                 {
-                    return split[(split.Length - 1)];
+                    string[] split = NomeCompleto.Split(" ");
+                    return split[0];
                 }
+                return string.Empty;
             }
-            return string.Empty;
         }
+
+        [NotMapped]
+        public string Sobrenome
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(NomeCompleto))
+                {
+                    string[] split = NomeCompleto.Split(" ");
+                    if (split.Length > 1)
+                    {
+                        return split[(split.Length - 1)];
+                    }
+                }
+                return string.Empty;
+            }
+        }
+
+        #endregion
     }
 }

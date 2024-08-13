@@ -4,6 +4,7 @@ using CMLApplication.Models;
 using CMLApplication.Repository.Implementation;
 using CMLApplication.Repository.Interfaces;
 using CMLApplication.Requests;
+using CMLApplication.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,7 @@ builder.Services.AddScoped<IGrupoColaboradorPermissaoRepository, GrupoColaborado
 
 // Adicionando escopos de serviços
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IColaboradorService, IColaboradorService>();
 
 // Configurando validadores de requisições
 builder.Services.Configure<ApiBehaviorOptions>(options =>
@@ -80,7 +82,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthentication(); // Certifique-se de adicionar a autenticação aqui
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

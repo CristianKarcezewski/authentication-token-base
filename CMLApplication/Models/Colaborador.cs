@@ -4,6 +4,24 @@ namespace CMLApplication.Models
 {
     public class Colaborador
     {
+        #region Propriedades
+
+        public int Id { get; set; }
+        public int IdGrupoColaborador { get; set; }
+        public string? NomeCompleto { get; set; }
+        public string? Login { get; set; }
+        public string? Email { get; set; }
+        public string? Senha { get; set; }
+        public string? Telefone { get; set; }
+        public bool Active { get; set; }
+        public DateTime? UltimaAtualizacao { get; set; }
+        public DateTime? DTHR { get; set; }
+        public List<Permissao>? Permissoes { get; set; }
+
+        #endregion
+
+        #region Construtores
+
         public Colaborador()
         {
             this.Permissoes = new List<Permissao>();
@@ -15,6 +33,7 @@ namespace CMLApplication.Models
             this.NomeCompleto = colaboradorEntity.NomeCompleto;
             this.Login = colaboradorEntity.Login;
             this.Email = colaboradorEntity.Email;
+            this.Senha = colaboradorEntity.Chave.Senha;
             this.Telefone = colaboradorEntity.Telefone;
             this.Active = colaboradorEntity.Ativo;
             this.UltimaAtualizacao = colaboradorEntity.UltimaAtualizacao;
@@ -22,38 +41,39 @@ namespace CMLApplication.Models
             this.Permissoes = new List<Permissao>();
         }
 
-        public int Id { get; set; }
-        public int IdGrupoColaborador { get; set; }
-        public string? NomeCompleto { get; set; }
-        public string? Login { get; set; }
-        public string? Email { get; set; }
-        public string? Telefone { get; set; }
-        public bool Active { get; set; }
-        public DateTime? UltimaAtualizacao { get; set; }
-        public DateTime? DTHR { get; set; }
-        public List<Permissao>? Permissoes { get; set; }
+        #endregion
 
-        public string Nome()
-        {
-            if (!string.IsNullOrWhiteSpace(NomeCompleto))
-            {
-                string[] split = NomeCompleto.Split(" ");
-                return split[0];
-            }
-            return string.Empty;
-        }
+        #region Propriedades Tratadas
 
-        public string Sobrenome()
+        public string Nome
         {
-            if (!string.IsNullOrWhiteSpace(NomeCompleto))
+            get
             {
-                string[] split = NomeCompleto.Split(" ");
-                if (split.Length > 1)
+                if (!string.IsNullOrWhiteSpace(NomeCompleto))
                 {
-                    return split[(split.Length - 1)];
+                    string[] split = NomeCompleto.Split(" ");
+                    return split[0];
                 }
+                return string.Empty;
             }
-            return string.Empty;
         }
+
+        public string Sobrenome
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(NomeCompleto))
+                {
+                    string[] split = NomeCompleto.Split(" ");
+                    if (split.Length > 1)
+                    {
+                        return split[(split.Length - 1)];
+                    }
+                }
+                return string.Empty;
+            }
+        }
+
+        #endregion
     }
 }

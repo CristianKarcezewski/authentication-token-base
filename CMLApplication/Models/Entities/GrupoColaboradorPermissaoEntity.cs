@@ -9,21 +9,28 @@ namespace CMLApplication.Models.Entities
     [Table("grupos_colaboradores_permissoes")]
     public class GrupoColaboradorPermissaoEntity
     {
+        #region Propriedades
         [Key]
         [Column("id")]
         public int Id { get; set; }
 
-        [Column("id_grupos_colaboradores")]
+        [Required, Column("id_grupos_colaboradores")]
         public int IdGrupoColaborador { get; set; }
 
-        [Column("id_permissoes")]
+        [Required, Column("id_permissoes")]
         public int IdPermissao { get; set; }
+
+        #endregion
+
+        #region Chaves Estrangeiras
 
         [ForeignKey("IdPermissao")]
         public PermissaoEntity? Permissao { get; set; }
 
         [ForeignKey("IdGrupoColaborador")]
         public GrupoColaboradorEntity? GrupoColaborador { get; set; }
+
+        #endregion
     }
 
 }

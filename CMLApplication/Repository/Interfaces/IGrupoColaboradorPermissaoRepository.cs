@@ -2,7 +2,7 @@
 {
     public interface IGrupoColaboradorPermissaoRepository
     {
-        List<T> Filtrar<T>(T entidade = null, int skip = 0, int take = 500, params string[] orderBy) where T : class;
+        List<T> Filtrar<T>(T? entidade = null, int skip = 0, int take = 500, params string[] orderBy) where T : class;
 
         T BuscarPorId<T>(int id) where T : class;
 

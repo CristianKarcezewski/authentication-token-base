@@ -6,7 +6,7 @@ using System.Linq.Dynamic.Core;
 
 namespace CMLApplication.Repository.Implementation
 {
-    public class GrupoColaboradorPermissaoRepository : IGrupoColaboradorPermissaoRepository
+    public class GrupoColaboradorPermissaoRepository : IBaseRepository
     {
         private readonly RepositoryDBContext _context;
 

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CMLApplication")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a3adfbbce0c7d09ad5e30c78f3a2092df13987f7")]
 [assembly: System.Reflection.AssemblyProductAttribute("CMLApplication")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CMLApplication")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -2,10 +2,6 @@
 using CMLApplication.Common.CustomExceptions;
 using CMLApplication.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace CMLApplication.Controllers
 {
@@ -26,6 +22,30 @@ namespace CMLApplication.Controllers
         }
 
         [HttpPost]
+        [Route("login-colaborador-ad")]
+        public IActionResult LoginColaboradorAD([FromBody] Autenticacao autenticacao)
+        {
+            try
+            {
+                return Ok(authenticationService.LoginColaboradorAD(autenticacao));
+            }
+            catch (CustomDBException dbException)
+            {
+                _logger.LogError(dbException, "Erro em 'Repository'");
+                return StatusCode(dbException.HTTPErrorCode, dbException.Message);
+            }
+            catch (CustomServiceException serviceException)
+            {
+                _logger.LogError(serviceException, "Erro em 'Service'");
+                return StatusCode(serviceException.HTTPErrorCode, serviceException.Message);
+            }
+            catch (Exception ex) {
+                _logger.LogError(ex, "Erro não tratado");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
         [Route("login-colaborador")]
         public IActionResult LoginColaborador([FromBody] Autenticacao autenticacao)
         {
@@ -43,7 +63,8 @@ namespace CMLApplication.Controllers
                 _logger.LogError(serviceException, "Erro em 'Service'");
                 return StatusCode(serviceException.HTTPErrorCode, serviceException.Message);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 _logger.LogError(ex, "Erro não tratado");
                 return StatusCode(500, ex.Message);
             }

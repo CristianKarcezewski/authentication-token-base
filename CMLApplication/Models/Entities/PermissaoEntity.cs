@@ -6,10 +6,14 @@ namespace CMLApplication.Models.Entities
     [Table("permissoes")]
     public class PermissaoEntity
     {
+        #region Propriedades
+
         [Key, Column("id")]
         public int Id { get; set; }
 
-        [Column("descricao")]
+        [Required, Column("descricao")]
         public string? Descricao { get; set; }
+
+        #endregion
     }
 }
